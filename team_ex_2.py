@@ -3,12 +3,31 @@ import time
 import wikipedia
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 
+# Task 3: make convert_to_str always return a safe string
 def convert_to_str(obj):
-    if type(obj) == list:
-        mystr = '\n'.join(obj)
-        return mystr
-    elif type(obj) in [str, int, float]:
-        return str(obj)
+    # If it's a list, convert each element to string and join with newlines
+    if isinstance(obj, list):
+        return '\n'.join(str(x) for x in obj)
+    # If it's None, return an empty string
+    if obj is None:
+        return ""
+    # For any other type (str, int, float, dict, custom objects), just use str()
+    return str(obj)
+
+# (Teammate's original function – now unused but left in place)
+def get_search_term():
+    term = input("Enter a Wikipedia topic to search: ").strip()
+    if len(term) < 4:
+        term = "generative artificial intelligence"
+    return term
+
+# Task 4: new function that does the same job but matches your task description
+def ask_topic_from_usr():
+    term = input("Enter a Wikipedia topic to search (4+ characters): ").strip()
+    if len(term) < 4:
+        print("Search term too short. Using default: 'generative artificial intelligence'.")
+        return "generative artificial intelligence"
+    return term
 
 def dl_and_save(item):
     try:
@@ -49,15 +68,12 @@ def concurrent_process(results):
     t_lapse = t_end - t_start
     print(f'code executed in {t_lapse} seconds')
 
-def get_search_term():
-    term = input("Enter a Wikipedia topic to search: ").strip()
-    if len(term) < 4:
-        term = "generative artificial intelligence"
-    return term
-
 def main():
     os.makedirs("wiki_dl", exist_ok=True)
-    term = get_search_term()
+
+    # Task 4: use your new function instead of get_search_term
+    term = ask_topic_from_usr()
+
     results = wikipedia.search(term)
     if not results:
         print("No results found for the search term.")
