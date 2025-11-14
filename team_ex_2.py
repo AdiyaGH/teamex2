@@ -22,13 +22,24 @@ def ask_topic_from_usr():
         return "generative artificial intelligence"
     return term
 
+
+# Task 2 and 6: Directory to store downloaded .txt files
+OUTPUT_DIR = "wiki_dl"
+
+# Task 2: shared download + save function (used by all implementations)
 def dl_and_save(item):
+    
+  # make sure output directory exists
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR, exist_ok=True)
+
     try:
         page = wikipedia.page(item, auto_suggest=False)
-        title = page.title
+        title = page.title    
         references = convert_to_str(page.references)
-        out_filename = os.path.join("wiki_dl", title + ".txt")
-        print(f'writing to {out_filename}')
+
+        out_filename = os.path.join(OUTPUT_DIR, title + ".txt")
+        print(f'writing to {out_filename}')    
         with open(out_filename, 'w') as fileobj:
             fileobj.write(references)
     except Exception as e:
