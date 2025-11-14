@@ -14,7 +14,7 @@ def convert_to_str(obj):
     # For any other type (str, int, float, dict, custom objects), just use str()
     return str(obj)
 
-# (Teammate's original function – now unused but left in place)
+# (original function – now unused but left in place)
 def get_search_term():
     term = input("Enter a Wikipedia topic to search: ").strip()
     if len(term) < 4:
