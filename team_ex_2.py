@@ -14,13 +14,6 @@ def convert_to_str(obj):
     # For any other type (str, int, float, dict, custom objects), just use str()
     return str(obj)
 
-# (original function – now unused but left in place)
-def get_search_term():
-    term = input("Enter a Wikipedia topic to search: ").strip()
-    if len(term) < 4:
-        term = "generative artificial intelligence"
-    return term
-
 # Task 4: new function that does the same job but matches your task description
 def ask_topic_from_usr():
     term = input("Enter a Wikipedia topic to search (4+ characters): ").strip()
